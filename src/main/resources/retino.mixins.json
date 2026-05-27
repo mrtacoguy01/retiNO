@@ -5,7 +5,7 @@
   "mixins": [
   ],
   "client": [
-    "WindowHintsMixin"
+    "GlBackendMixin"
   ],
   "injectors": {
     "defaultRequire": 1
