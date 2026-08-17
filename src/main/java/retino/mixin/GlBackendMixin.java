@@ -1,19 +1,16 @@
 package retino.mixin;
 
-import com.mojang.blaze3d.opengl.GlBackend;
-import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = GlBackend.class)
+@Mixin(targets = "com.mojang.blaze3d.platform.Window")
 public abstract class GlBackendMixin {
-	@Inject(
-		at = @At("HEAD"),
-		method = "setWindowHints"
+	@ModifyConstant(
+		method = "createWindow",
+		constant = @Constant(longValue = 8192L)
 	)
-	private void adjustWindowHints(CallbackInfo callbackInfo) {
-		GLFW.glfwWindowHint(GLFW.GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW.GLFW_FALSE);
+	private long disableHighPixelDensity(long constant) {
+		return 0L;
 	}
 }
