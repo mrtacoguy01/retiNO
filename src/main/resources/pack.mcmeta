@@ -1,0 +1,8 @@
+{
+  "pack": {
+    "description": "hi",
+    "pack_format": 97,
+    "min_format": 1,
+    "max_format": 2147483647
+  }
+}

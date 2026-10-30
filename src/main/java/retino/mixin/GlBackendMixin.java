@@ -7,14 +7,18 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(targets = "com.mojang.blaze3d.platform.Window")
 public abstract class GlBackendMixin {
 	@ModifyArg(
-		method = "createWindow",
+		method = {
+			"createWindow",
+			"createWindowStatic"
+		},
 		at = @At(
 			value = "INVOKE",
 			target = "Lcom/mojang/renderpearl/api/device/GpuBackend;createWindow(Ljava/lang/String;IIJ)J"
 		),
-		index = 3
+		index = 3,
+		require = 1
 	)
-	private long disableHighPixelDensity(long flags) {
+	private static long disableHighPixelDensity(long flags) {
 		try {
 			Class<?> sdlVideo = Class.forName("org.lwjgl.sdl.SDLVideo");
 			long highPixelDensity =

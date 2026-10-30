@@ -25,7 +25,7 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	filesMatching("fabric.mod.json") {
+	filesMatching(["fabric.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml"]) {
 		expand "version": project.version
 	}
 }
@@ -50,6 +50,13 @@ java {
 
 jar {
 	from "LICENSE"
+	manifest {
+		attributes(
+			"MixinConfigs": "retino.mixins.json"
+		)
+	}
+	exclude "net/minecraftforge/**"
+	exclude "net/neoforged/**"
 }
 
 // configure the maven publication
@@ -66,3 +73,5 @@ publishing {
 		// mavenLocal()
 	}
 }
+
+
