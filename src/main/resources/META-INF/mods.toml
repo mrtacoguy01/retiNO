@@ -1,0 +1,24 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "MIT"
+issueTrackerURL = "https://github.com/juliand665/retiNO/issues"
+
+[[mods]]
+modId = "retino"
+version = "${version}"
+displayName = "retiNO"
+authors = "juliand665"
+description = '''
+Makes Minecraft render at half-resolution on Retina displays for improved performance.
+'''
+logoFile = "assets/retino/logo.png"
+
+[[dependencies.retino]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[26.1, 26.2]"
+ordering = "NONE"
+side = "CLIENT"
+
+[[mixins]]
+config = "retino.mixins.json"
